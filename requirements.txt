@@ -1,0 +1,4 @@
+python>=3.11
+notebook>=7.0.3
+jupytext>=1.15.0
+matplotlib>=3.8.0
