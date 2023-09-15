@@ -6,11 +6,16 @@ authors = ["askras <askrasnikov@gmail.com>"]
 license = "BSD 3-Clause License"
 readme = "README.md"
 
+
 [tool.poetry.dependencies]
 python = "^3.11"
 notebook = "^7.0.3"
 jupytext = "^1.15.1"
 matplotlib = "^3.8.0"
+
+
+[tool.jupytext]
+formats = "ipynb,md"
 
 
 [build-system]
