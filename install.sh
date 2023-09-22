@@ -12,3 +12,6 @@ jupyter notebook
 
 git status
 git add labs/lab01/lab01_XX/
+git status
+git commit -m 'Описание коммита'
+git push origin
