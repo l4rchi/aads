@@ -5,13 +5,12 @@ import functools
 import matplotlib.pyplot as plt
 
 
-def timing_decorator(ndigits: int, number: int, setup: str) -> typing.Callable:
+def timing_decorator(ndigits: int, number: int) -> typing.Callable:
     def decorator(func: typing.Callable) -> typing.Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> float:
             usage_time = timeit.timeit(
                 lambda: func(*args, **kwargs),
-                setup=setup,
                 number=number,
             )
             return round(usage_time / number, ndigits)
@@ -24,20 +23,18 @@ def timing_decorator(ndigits: int, number: int, setup: str) -> typing.Callable:
 max_n = 1100001
 max_vector = [random.randint(1, 100) for _ in range(max_n)]
 
+ndigits = 8
+number_of_runs = 12
+
 n_values = list(range(1, max_n, 1100))
 constant_times = []
 
+@timing_decorator(ndigits, number_of_runs)
+def constant_function(vector):
+        return 11
+
 for n in n_values:
     print(n)
-    ndigits = 6
-    number_of_runs = 5
-
-
-    @timing_decorator(ndigits, number_of_runs, f"vector = {max_vector[:n]}")
-    def constant_function(vector):
-        return 9
-
-
     constant_time = constant_function(max_vector[:n])
     constant_times.append(constant_time)
 
