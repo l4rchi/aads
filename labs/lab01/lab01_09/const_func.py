@@ -21,28 +21,29 @@ def timing_decorator(ndigits: int, number: int, setup: str) -> typing.Callable:
     return decorator
 
 
-max_n = 90001
+max_n = 1100001
 max_vector = [random.randint(1, 100) for _ in range(max_n)]
 
-n_values = list(range(1, max_n, 900))
-average_times = []
+n_values = list(range(1, max_n, 1100))
+constant_times = []
 
 for n in n_values:
+    print(n)
     ndigits = 6
     number_of_runs = 5
 
 
     @timing_decorator(ndigits, number_of_runs, f"vector = {max_vector[:n]}")
-    def calculate_average(vector):
-        return sum(vector) / len(vector)
+    def constant_function(vector):
+        return 9
 
 
-    average_time = calculate_average(max_vector[:n])
-    average_times.append(average_time)
+    constant_time = constant_function(max_vector[:n])
+    constant_times.append(constant_time)
 
-plt.plot(n_values, average_times, linestyle='-', color='b')
-plt.title('Зависимость среднего времени выполнения от n')
+plt.plot(n_values, constant_times, linestyle='-', color='r')
+plt.title('Зависимость времени выполнения постоянной функции от n')
 plt.xlabel('n')
-plt.ylabel('Среднее время выполнения (секунды)')
-
-plt.savefig('graph.png')
+plt.ylabel('Время выполнения (секунды)')
+plt.savefig('constant_time.png')
+plt.close()
