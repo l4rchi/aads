@@ -29,9 +29,11 @@ number_of_runs = 12
 n_values = list(range(1, max_n, 1100))
 constant_times = []
 
+
 @timing_decorator(ndigits, number_of_runs)
 def constant_function(vector):
-        return 11
+    return 11
+
 
 for n in n_values:
     print(n)
