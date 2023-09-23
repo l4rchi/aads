@@ -31,20 +31,21 @@ average_times = []
 
 
 @timing_decorator(ndigits, number_of_runs)
-def calculate_average(vector):
-    return sum(vector) / len(vector)
-
+def find_max_bruteforce(vector):
+    max_value = vector[0]
+    for value in vector:
+        if value > max_value:
+            max_value = value
+    return max_value
 
 for n in n_values:
     print(n)
 
-    average_time = calculate_average(max_vector[:n])
+    average_time = find_max_bruteforce(max_vector[:n])
     average_times.append(average_time)
 
 plt.plot(n_values, average_times, linestyle='-', color='b')
-plt.title('Зависимость времени поиска среднего арифметического от n')
+plt.title('Зависимость времени поиска максимума простым перебором от n')
 plt.xlabel('n')
 plt.ylabel('Среднее время выполнения (секунды)')
-
-plt.savefig('average_value.png')
-
+plt.savefig('max.png')
