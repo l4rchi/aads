@@ -21,12 +21,12 @@ def timing_decorator(ndigits: int, number: int) -> typing.Callable:
     return decorator
 
 
-max_n = 3301
+max_n = 1000
 
 ndigits = 6
 number_of_runs = 5
 
-n_values = list(range(1, max_n, 1100))
+n_values = list(range(1, max_n, 10))
 average_times = []
 
 
