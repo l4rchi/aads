@@ -47,4 +47,3 @@ plt.xlabel('n')
 plt.ylabel('Среднее время выполнения (секунды)')
 
 plt.savefig('average_value.png')
-

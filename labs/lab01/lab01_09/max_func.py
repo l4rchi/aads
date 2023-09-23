@@ -38,6 +38,7 @@ def find_max_bruteforce(vector):
             max_value = value
     return max_value
 
+
 for n in n_values:
     print(n)
 

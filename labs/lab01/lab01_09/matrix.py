@@ -3,6 +3,7 @@ import typing
 import timeit
 import functools
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def timing_decorator(ndigits: int, number: int) -> typing.Callable:
@@ -20,8 +21,7 @@ def timing_decorator(ndigits: int, number: int) -> typing.Callable:
     return decorator
 
 
-max_n = 1100001
-max_vector = [random.randint(1, 100) for _ in range(max_n)]
+max_n = 3301
 
 ndigits = 6
 number_of_runs = 5
@@ -31,21 +31,21 @@ average_times = []
 
 
 @timing_decorator(ndigits, number_of_runs)
-def horner_method(v):
-    result = 0
-    for coeff in reversed(v):
-        result = coeff + 1.5 * 11 * result
-    return result
+def matrix_multiply(matrix_A, matrix_B):
+    return np.dot(matrix_A, matrix_B)
 
 
 for n in n_values:
     print(n)
 
-    average_time = horner_method(max_vector[:n])
+    matrix_A = np.random.randint(1, 2, size=(n, n))
+    matrix_B = np.random.randint(1, 2, size=(n, n))
+
+    average_time = matrix_multiply(matrix_A, matrix_B)
     average_times.append(average_time)
 
 plt.plot(n_values, average_times, linestyle='-', color='b')
-plt.title('Зависимость времени вычисление полинома методом Горнера от n')
-plt.xlabel('n')
+plt.title('Зависимость времени выполнения матричного умножения от n')
+plt.xlabel('порядок матриц - n')
 plt.ylabel('Среднее время выполнения (секунды)')
-plt.savefig('horner_pol.png')
+plt.savefig('matrix_multiply.png')
