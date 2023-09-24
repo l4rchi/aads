@@ -31,7 +31,7 @@ average_times = []
 
 
 @timing_decorator(ndigits, number_of_runs)
-def find_max_bruteforce(vector):
+def find_max(vector):
     max_value = vector[0]
     for value in vector:
         if value > max_value:
@@ -42,7 +42,7 @@ def find_max_bruteforce(vector):
 for n in n_values:
     print(n)
 
-    average_time = find_max_bruteforce(max_vector[:n])
+    average_time = find_max(max_vector[:n])
     average_times.append(average_time)
 
 plt.plot(n_values, average_times, linestyle='-', color='b')
