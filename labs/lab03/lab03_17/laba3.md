@@ -12,6 +12,173 @@ jupyter:
     name: python3
 ---
 
+<!-- #region -->
+<h1> ОТЧЕТ </h1>
+<h3> Лабораторная работа №3 <br> <br>
+    «Линейные двунаправленные списки (Doubly Linked Lists)» </h3>
+<br>
+<h4> Цель работы: </h4>
+Изучение структуры данных «линейные двунаправленные списки», а также основных операций над ними.
+<br>
+<br>
+<h4> Постановка задачи: </h4>
+
+1. Написать собственную реализацию двунаправленного списка в виде класса. Приэтом каждая его операция должна быть реализована как метод класса и добавлению/удалению элемента должна предшествовать проверка возможности выполнения этих операций.
+2. Реализовать программу, выполняющую стандартный набор операций с линейным двунаправленным списком:
+    * просмотр линейного двунаправленного списка;
+    * вставка элемента в начало списка;
+    * вставка элемента в середину списка перед указанным значением;
+    * вставка элемента в середину списка после указанного значения;
+    * вставка элемента в конец списка;
+    * удаление элемента в начале списка;
+    * удаление элемента, стоящего перед указанным значением списка;
+    * удаление элемента, стоящего после указанного значением списка;
+    * удаление определенного элемента в списке;
+    * удаление элемента в конце списка;
+    * очистка списка;
+    * поиск элемента списка по его значяению;
+    * реверс списка (переворачивание списка задом на перед).
+3. Реализовать приложение, для работы со списком, которое реализует следующий набор действий:
+    * инициализация пустого линейного однонаправленного списка;
+    * организация диалогового цикла с пользователем;
+<br>
+<br>
+<h4> Code Listing: </h4>
+
+```python
+class Node: 
+    def __init__(self, data, next = None)
+
+class Singly_Linked_List:
+    def __init__(self)
+
+    def __str__(self) #вывод списка
+
+    def push_front(self, data) #вставка элемента в начало списка
+
+    def push_back(self, data) #вставка элемента в конец списка
+
+    def insert(self, index, data) #вставка элемента по индексу
+
+    def insert_before(self, item, data) #вставка элемента перед первым вхождением указанного элемента
+
+    def insert_after(self, item, data) #вставка элемента после первого вхождения указанного элемента
+
+    def find_item(self, data) #поиск элемента по значению
+    
+    def find_index(self, index) #поиск элемента по индексу
+    
+    def pop_front(self) #удаление элемента из начала списка
+    
+    def pop_back(self) #удаление элемента из конца списка
+    
+    def pop(self, index) #удаление элемента по индексу
+
+    def pop_before(self, item) #удаление элемента перед первым вхождением указанного элемента
+    
+    def pop_after(self, item) #удаление элемента после первого вхождения указанного элемента
+
+    def remove(self, index, length): #удаление нескольких элементов по индексу и количеству
+    
+    def reverse(self) #поворот списка задом наперед
+    
+    def clear(self) #очистка списка
+    
+    #addition
+    def count(self, item) #подсчет количества элементов с заданным значением
+
+    def sort(self) #сортировка списка
+
+    #individuals
+    def is_digit(self) #провека списка на численные элементы
+
+    def only_odd_numbers(self) #Индивидуальное задание 1-17: удаление из списка всех четных чисел
+
+    def more_than_sum(self) #Индивидуальное задание 2-17: подсчет количества элементов, превосходящих сумму всех элементов списка
+
+#Взаимодействие с пользователем
+x = input("...")
+while (x):
+    ///код
+    match x:
+        case "menu":
+            ///код
+        
+        case "show":
+            ///код
+        
+        case "add":
+            ///код
+        
+        case "remove":
+            ///код
+            
+        case "find value":
+            ///код
+
+        case "find index":
+            ///код
+        
+        case "reverse":
+            ///код
+        
+        case "clear":
+            ///код
+
+        case "count":
+            ///код
+
+        case "sort":
+            ///код
+            
+        case "is digit":
+            ///код
+
+        case "only odd numbers":
+            ///код
+
+        case "more than sum":
+            ///код
+            
+        case "stop":
+            ///код
+    ///код
+```
+<br>
+<h4> Выводы </h4>
+В ходе лабораторной работы была изучена структура данных «линейные двунаправленные 
+списки», написана собственнаяя реализация двунаправленного списка в виде класса 
+таким образом, что каждая его операция является методом класса. Реализована 
+программа, выполняющая стандартный набор операций с линейным двунаправленным 
+списком и приложение, которое осуществляет диалоговый цикл с пользователем.
+<br>
+<br>
+<h4> Ответы на контрольные вопросы </h4>
+
+1. *Что такое динамическая структура данных?* <br>
+Динамические структуры данных – это структуры данных, память под которые выделяется и освобождается по мере необходимости в процессе выполнения программы, а не в момент ее запуска. Динамические структуры данных в процессе существования в памяти могут изменять не только число составляющих их элементов, но и характер связей между элементами. <br>
+2. *Что такое список?* <br>
+Список — это упорядоченный набор элементов, каждый из которых имеет свой номер, или индекс, позволяющий быстро получить к нему доступ.<br>
+3. *Какие виды списков существуют?*<br>
+    * Односвязный линейный список: каждый узел содержит 1 поле указателя на следующий узел; поле указателя последнего узла содержит нулевое значение (указывает на NULL)<br>
+    * Односвязный циклический список: каждый узел ОЦС содержит 1 поле указателя на следующий узел; поле указателя последнего узла содержит адрес первого узла (корня списка)<br>
+    * Двусвязный линейный список: каждый узел ДЛС содержит два поля указателей: на следующий и на предыдущий узел; поле указателя на следующий узел последнего узла содержит нулевое значение (указывает на NULL); поле указателя на предыдущий узел первого узла (корня списка) также содержит нулевое значение (указывает на NULL)<br>
+    * Двусвязный циклический список: каждый узел ДЦС содержит два поля указателей: на следующий и на предыдущий узел; поле указателя на следующий узел последнего узла содержит адрес первого узла (корня списка); поле указателя на предыдущий узел первого узла (корня списка) содержит адрес последнего узла<br>
+4. *Какие основные операции выполняются над списком?*<br>
+    * Добавление элементов в список<br>
+    * Вставка элемента в список<br>
+    * Удаление элемента из списка<br>
+    * Поиск элемента в списке<br>
+    * Реверс списка (переворачивание списка задом на перед)<br>
+    * Подсчет количества элементов с заданным значением<br>
+    * Сортировка списка на основе функции<br>
+    * Очистка списка<br>
+5. *Особенности выполнения операции вставки первого и не первого элемента в двунаправленный список.* <br>
+В линейном двунаправленном списке при вставке первого элемента надо менять указатель head, а при вставке последующих элементов нужно изменять указатели предыдущего элемента.<br>
+6. *Особенности выполнения операций удаления первого и не первого элемента.* <br>
+При удалении первого элемента в линейном двунаправленном списке, также как и при вставке нужно изменять указатель head, а при удалении последующих надо менять указатели предыдущих.
+<!-- #endregion -->
+
 ```python
 class Node:
     def __init__(self, data, next = None, prev = None):
@@ -24,19 +191,6 @@ class Doubly_Linked_List:
         self.size = 0
         self.head = None
         self.tail = None
-
-    # def print(self):
-    #     if self.head == None:
-    #         print("list is empty:", self.size, self.head)
-    #     else:
-    #         temp = self.head
-    #         print("list size =", self.size)
-    #         print("head is =", self.head.data)
-    #         print ("list:", end = " ")
-    #         while temp:
-    #             print(temp.data, end = " ")
-    #             temp = temp.next
-    #         print()
 
     def __str__(self):
         if self.head == None:
@@ -104,6 +258,24 @@ class Doubly_Linked_List:
             item.next = curr
             curr.prev = item
             self.size += 1
+
+    def insert_before(self, item, data):
+        if self.head == None:
+            return "loser"
+        index = self.find_item(item)
+        if index == "ErRoR":
+            return "ErRoR"
+        self.insert(str(index), data)
+        return "Ok"
+
+    def insert_after(self, item, data):
+        if self.head == None:
+            return "loser"
+        index = self.find_item(item)
+        if index == "ErRoR":
+            return "ErRoR"
+        self.insert(str(index + 1), data)
+        return "Ok"
 
     def find_item(self, data): #поиск элемента по значению
         temp = self.head
@@ -175,6 +347,26 @@ class Doubly_Linked_List:
             self.size -= 1
             return item.data
 
+    def pop_before(self, item):
+        if self.head == None:
+            return "loser"
+        index = self.find_item(item)
+        if index == "ErRoR":
+            return "ErRoR"
+        elif index == 0:
+            return "first"
+        return self.pop(str(index - 1))
+
+    def pop_after(self, item):
+        if self.head == None:
+            return "loser"
+        index = self.find_item(item)
+        if index == "ErRoR":
+            return "ErRoR"
+        elif index == self.size - 1:
+            return "last"
+        return self.pop(str(index + 1))
+
     def remove(self, index, length):
         if (not index.isdigit()) or (not length.isdigit()):
             return "ErRoR"
@@ -185,8 +377,8 @@ class Doubly_Linked_List:
         elif self.head == None:
             return "empty"
         else:
+            index = str(index)
             for i in range(0, length):
-                index = str(index)
                 temp = self.pop(index)
 
     def reverse(self):
@@ -248,26 +440,66 @@ class Doubly_Linked_List:
                 self.push_back(i)
         return self
 
-#Индивидуальное задание 1-17
-# def 
+    def is_digit(self):
+        temp = self.head
+        count_not_digits = 0
+        while temp != None:
+            if not ((temp.data[1::].isdigit() and temp.data[0] == '-') or temp.data.isdigit()):
+                count_not_digits += 1
+            temp = temp.next
+        if count_not_digits > 0:
+            return False
+        else:
+            return True
 
-#Индивидуальное задание 2-17
-# def no_triple_numbers(mylist):
+    #Индивидуальное задание 1-17
+    def only_odd_numbers(self):
+        if self.is_digit():
+            temp = self.head
+            while temp != None:
+                if int(temp.data) % 2 == 0:
+                    index = self.find_item(temp.data)
+                    deleted = self.pop(str(index))
+                temp = temp.next
+            return self
+        else:
+            return "ErRoR"
+    
+
+    #Индивидуальное задание 2-17
+    def more_than_sum(self):
+        if self.is_digit():
+            count = 0
+            sum = 0
+            temp = self.head
+            while temp != None:
+                sum += int(temp.data)
+                temp = temp.next
+            temp = self.head
+            while temp != None:
+                if int(temp.data) > sum:
+                    count += 1
+                temp = temp.next
+            if count > 0:
+                return count
+            else:
+                return "NoNo"
+        else:
+            return "ErRoR"
     
 
 # Взаимодействие с пользователем
-x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть список: введите Show\nЕсли вы хотите добавить элементы в список: введите Add\nЕсли вы хотите удалить элементы из списка: введите Remove\nЕсли вы хотите найти элемент в списке: введите Find Value\nЕсли вы хотите вывести определенный элемент из списка: введите Find Index\nЕсли вы хотите развернуть список: введите Reverse\nЕсли вы хотите очистить список: введите Clear\nЕсли вы хотите сложить два списка: введите Concatenation\nЕсли вы хотите удалить из списка все элементы, которых больше двух: введите No Triple Elements\nЕсли вы хотите узнать количество вхождений некоторого элемента: введите Count\nЕсли вы хотите отсортировать список: введите Sort\nЕсли вы хотите закончить: введите Stop\n")
+x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть список: введите Show\nЕсли вы хотите добавить элементы в список: введите Add\nЕсли вы хотите удалить элементы из списка: введите Remove\nЕсли вы хотите найти элемент в списке: введите Find Value\nЕсли вы хотите вывести определенный элемент из списка: введите Find Index\nЕсли вы хотите развернуть список: введите Reverse\nЕсли вы хотите очистить список: введите Clear\nЕсли вы хотите узнать количество вхождений некоторого элемента: введите Count\nЕсли вы хотите отсортировать список: введите Sort\nЕсли вы хотите проверить состоит ли список только из численных элементов: введите Is Digit\nЕсли вы хотите удалить из списка все четные элеметы (только для списков с численными элементами): введите Only Odd Numbers\nЕсли вы хотите посчитать количество элементов в списке, которые больше его суммы (только для списков с численными элементами): введите More Than Sum\nЕсли вы хотите закончить: введите Stop\n")
 mylist = Doubly_Linked_List()
 while (x):
     x = x.lower()
     match x:
         case "menu":
-            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть список: введите Show\nЕсли вы хотите добавить элементы в список: введите Add\nЕсли вы хотите удалить элементы из списка: введите Remove\nЕсли вы хотите найти элемент в списке: введите Find Value\nЕсли вы хотите вывести определенный элемент из списка: введите Find Index\nЕсли вы хотите развернуть список: введите Reverse\nЕсли вы хотите очистить список: введите Clear\nЕсли вы хотите сложить два списка: введите Concatenation\nЕсли вы хотите удалить из списка все элементы, которых больше двух: введите No Triple Elements\nЕсли вы хотите узнать количество вхождений некоторого элемента: введите Count\nЕсли вы хотите отсортировать список: введите Sort\nЕсли вы хотите закончить: введите Stop")
+            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть список: введите Show\nЕсли вы хотите добавить элементы в список: введите Add\nЕсли вы хотите удалить элементы из списка: введите Remove\nЕсли вы хотите найти элемент в списке: введите Find Value\nЕсли вы хотите вывести определенный элемент из списка: введите Find Index\nЕсли вы хотите развернуть список: введите Reverse\nЕсли вы хотите очистить список: введите Clear\nЕсли вы хотите узнать количество вхождений некоторого элемента: введите Count\nЕсли вы хотите отсортировать список: введите Sort\nnЕсли вы хотите проверить состоит ли список только из численных элементов: введите Is Digit\nЕсли вы хотите удалить из списка все четные элеметы (только для списков с численными элементами): введите Only Odd Numbers\nЕсли вы хотите посчитать количество элементов в списке, которые больше его суммы (только для списков с численными элементами): введите More Than Sum\nЕсли вы хотите закончить: введите Stop")
         case "show":
-            # mylist.print()
             print(mylist)
         case "add":
-            message = input("Если вы хотите линейно заполнить список: введите Fill, если же добавить один элемент по индексу: введите Add\n")
+            message = input("Если вы хотите линейно заполнить список: введите Fill, если добавить один элемент по индексу: введите Add, если добавить элемент перед каким-то другим: введите Before, если после - After\n")
             if not message.isalpha():
                 print("YOU LOSER")
                 print("Надо было ввести команду :З")
@@ -320,11 +552,35 @@ while (x):
                         print("Не вводите некорректный индекс :З")
                     else:
                         print("Вы добавили элемент", item, "по индексу", index)
+                elif message == "before":
+                    item = input("Введите элемент, перед которым хотите вставить данные: ")
+                    data = input("Введите данные, которые хотите вставить: ")
+                    result = mylist.insert_before(item, data)
+                    if result == "ErRoR":
+                        print("YOU LOSER")
+                        print("Такого элемента не существует :З")
+                    elif result == "loser":
+                        print("YOU LOSER")
+                        print("Перед каким элементом в пустом списке вы собрались что-то вставлять (｡· v ·｡)?")
+                    else:
+                        print("Вы добавили элемент", data, "перед элементом", item)
+                elif message == "after":
+                    item = input("Введите элемент, после которого хотите вставить данные: ")
+                    data = input("Введите данные, которые хотите вставить: ")
+                    result = mylist.insert_after(item, data)
+                    if result == "ErRoR":
+                        print("YOU LOSER")
+                        print("Такого элемента не существует :З")
+                    elif result == "loser":
+                        print("YOU LOSER")
+                        print("После какого элемента в пустом списке вы собрались что-то вставлять (｡· v ·｡)?")
+                    else:
+                        print("Вы добавили элемент", data, "после элемента", item)
                 else:
                     print("YOU LOSER")
                     print("Вы ввели неправильную команду :З")
         case "remove":
-            message = input("Если вы хотите удалить несколько элементов: введите Remove, если один: введите Pop")
+            message = input("Если вы хотите удалить несколько элементов: введите Remove, если один: введите Pop, если удалить элемент перед каким-то другим: введите Before, если после - After")
             if not message.isalpha():
                 print("YOU LOSER")
                 print("Надо было ввести команду :З")
@@ -347,6 +603,34 @@ while (x):
                     if result == "ErRoR":
                         print("YOU LOSER")
                         print("Не вводите некорректный индекс :З")
+                    else:
+                        print("Вы удалили элемент", result)
+                elif message == "before":
+                    item = input("Введите элемент, перед которым хотите удалить данные: ")
+                    result = mylist.pop_before(item)
+                    if result == "ErRoR":
+                        print("YOU LOSER")
+                        print("Такого элемента не существует :З")
+                    elif result == "first":
+                        print("YOU LOSER")
+                        print("Перед первым элементом ничегошеньки нет :З")
+                    elif result == "loser":
+                        print("YOU LOSER")
+                        print("Перед каким элементом в пустом списке вы собрались что-то удалять (｡· v ·｡)?")
+                    else:
+                        print("Вы удалили элемент", result)
+                elif message == "after":
+                    item = input("Введите элемент, после которого хотите удалить данные: ")
+                    result = mylist.pop_after(item)
+                    if result == "ErRoR":
+                        print("YOU LOSER")
+                        print("Такого элемента не существует :З")
+                    elif result == "last":
+                        print("YOU LOSER")
+                        print("После последнего элемента ничегошеньки нет :З")
+                    elif result == "loser":
+                        print("YOU LOSER")
+                        print("После какого элемента в пустом списке вы собрались что-то удалять (｡· v ·｡)?")
                     else:
                         print("Вы удалили элемент", result)
                 else:
@@ -380,65 +664,6 @@ while (x):
                 print("Не стоит пытаться очистить пустой список :З")
             else:
                 print("Вы очистили список, его элементы больше не доступны :(")
-        case "concatenation":
-            print("Создайте список, который хотите присоединить:")
-            length = input("Введите длину списка: ")
-            mylist2 = Doubly_Linked_List()
-            if not length.isdigit():
-                print("YOU LOSER")
-                print("Надо было ввести число :З")
-            elif int(length) == 0:
-                print("Результат сложения списков:")
-                # list_concatenation(mylist, mylist2).print()
-                print(list_concatenation(mylist, mylist2))
-            else:
-                print("Если вдруг вы устанете заполнять список и захотите прервать процесс: введите ~I'm LoSeR~")
-                count_elements = 0
-                length = int(length)
-                flag = True
-                for i in range(0, length):
-                    if not flag:
-                        break
-                    item = input("Введите элемент: ")
-                    if item == "~I'm LoSeR~":
-                        while flag:
-                            exit = input("Если вы хотите закончить заполнение списка: введите Break, если добавить элемент ~I'm LoSeR~: введите Add\n")
-                            if not exit.isalpha():
-                                print("YOU LOSER")
-                                print("Надо было ввести команду :З")
-                                exit = input("Попробуйте еще раз: ")
-                            else:
-                                exit = exit.lower() 
-                                if exit == "break":
-                                    mylist2.clear()
-                                    print("Список для присоединения теперь снова пустой, для сложения списков пропишите команду еще раз")
-                                    flag = False
-                                    break
-                                elif exit == "add":
-                                    result = mylist2.push_back(item)
-                                    count_elements += 1
-                                    break
-                                else:
-                                    print("YOU LOSER")
-                                    print("Надо было ввести команду :З")
-                                    print("Попробуйте еще раз")
-                    else:
-                        result = mylist2.push_back(item)
-                        count_elements += 1
-                if count_elements == length:
-                    print("Поздравляем, второй список успешно создан")
-                    print("Результат сложения списков:")
-                    # list_concatenation(mylist, mylist2).print()
-                    print(list_concatenation(mylist, mylist2))
-        case "no triple elements":
-            result = no_triple_numbers(mylist)
-            if result == "ErRoR":
-                print("YOU LOSER")
-                print("Не пытайтесь почистить пустой список :З")
-            else:
-                print("Список успешно почищен")
-                # result.print()
-                print(result)
         case "count":
             item = input("Введите элемент, количество вхождений которого хотите узнать: ")
             result = mylist.count(item)
@@ -454,109 +679,33 @@ while (x):
                 print("YOU LOSER")
                 print("Не надо пытаться отсортировать пустой список :З")
             else:
-                # result.print()
                 print(result)
+        case "is digit":
+            result = mylist.is_digit()
+            if result:
+                print("Список состоит только из чисел")
+            else:
+                print("В списке присутствуют не только численные элементы")
+        case "only odd numbers":
+            result = mylist.only_odd_numbers()
+            if result == "ErRoR":
+                print("YOU LOSER")
+                print("Как оказалось, список состоял не только из численных элементов (｡· v ·｡)")
+            else:
+                print("Теперь в списке только нечетные элементы")
+        case "more than sum":
+            result = mylist.more_than_sum()
+            if result == "ErRoR":
+                print("YOU LOSER")
+                print("Как оказалось, список состоял не только из численных элементов (｡· v ·｡)")
+            elif result == "NoNo":
+                print("В списке не оказалось элементов, которые больше суммы списка")
+            else:
+                print("В списке", result, "элементов, которые больше суммы списка")
         case "stop":
             break
     x = input("Введите еще команду: ")
 
-# # tests
-# list1 = Doubly_Linked_List()
-# list1.print()
-# print("###test_push_front###")
-# list1.push_front(333)
-# list1.push_front(22)
-# list1.push_front(1)
-# list1.print()
-# print("###test_push_back###")
-# list1.push_back(4)
-# list1.push_back(55)
-# list1.push_back(666)
-# list1.print()
-# print("###test_insert###")
-# list1.insert(7, "fail")
-# list1.insert(6, "last")
-# list1.insert(0 , "first")
-# list1.insert(3, "insert")
-# list1.print()
-# print("###test_find_item###")
-# print(list1.find_item("gg"))
-# print(list1.find_item(11))
-# print(list1.find_item("insert"))
-# print(list1.find_item(22))
-# list1.print()
-# print("###test_find_index###")
-# print(list1.find_index(-2))
-# print(list1.find_index(4))
-# print(list1.find_index(10))
-# print(list1.find_index(-10))
-# list1.print()
-# print("###test_pop_front###")
-# print(list1.pop_front())
-# print(list1.pop_front())
-# list2 = Doubly_Linked_List()
-# print(list2.pop_front())
-# list1.print()
-# list2.print()
-# print("###test_pop_back###")
-# print(list1.pop_back())
-# print(list1.pop_back())
-# list2 = Doubly_Linked_List()
-# print(list2.pop_back())
-# list1.print()
-# list2.print()
-# print("###test_pop###")
-# print(list1.pop(-4))
-# print(list1.pop(-5))
-# print(list1.pop(5))
-# list2 = Doubly_Linked_List()
-# print(list2.pop(0))
-# print(list1.pop(4))
-# print(list1.pop(0))
-# list1.print()
-# list2.print()
-# print("###test_reverse###")
-# list1.print()
-# list1.reverse()
-# list1.print()
-# list2 = Doubly_Linked_List()
-# list2.reverse()
-# list2.print()
-# print("###test_clear###")
-# list1.print()
-# list1.clear()
-# list1.print()
-# list2 = Doubly_Linked_List()
-# list2.clear()
-# list2.print()
-# print("###test_list_concatenation###")
-# list1 = Doubly_Linked_List()
-# list2 = Doubly_Linked_List()
-# list1.push_front(333)
-# list1.push_front(22)
-# list1.push_front(1)
-# list2.push_back(4)
-# list2.push_back(55)
-# list2.push_back(666)
-# list_concatenation(list1, list2).print()
-# list3 = Doubly_Linked_List()
-# list4 = Doubly_Linked_List()
-# list_concatenation(list3, list4).print()
-# list_concatenation(list1, list4).print()
-# list_concatenation(list3, list2).print()
-# print("###test_no_triple_numbers###")
-# list1 = Doubly_Linked_List()
-# list2 = Doubly_Linked_List()
-# list1.push_front(333)
-# list1.push_front(22)
-# list1.push_front(333)
-# list1.push_front(22)
-# list1.push_front(1)
-# list1.push_front(22)
-# list1.push_front(0)
-# list1.print()
-# no_triple_numbers(list1)
-# list1.print()
 ```
 
 ```python
