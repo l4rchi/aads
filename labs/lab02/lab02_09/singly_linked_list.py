@@ -123,6 +123,25 @@ class List:
             del node_to_remove
         self.length = 0
 
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+
+    def find(self, target):
+        current = self.head
+        index = 0
+        while current:
+            if current.data == target:
+                return index
+            current = current.next
+            index += 1
+        return -1
     def display(self):
         current = self.head
         while current:
