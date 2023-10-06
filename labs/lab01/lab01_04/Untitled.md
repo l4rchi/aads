@@ -30,7 +30,7 @@ jupyter:
 
 
 
-![](./img/constimg.png)
+![](img/constimg.png)
 *Рис. 1: Постоянная функция* 
 
 ```python
@@ -38,7 +38,7 @@ def const_func(rand_vec):
     return rand_vec
 ```
 
-![](./img/horner.png)
+![](img/horner.png)
 *Рис. 2: Вычисление полинома методом Горнера [2]* 
 
 ```python
@@ -50,7 +50,7 @@ def gorner_estimate(rand_vec):
         polynome = vec_elem + x * polynome
 ```
 
-![](./img/simplesearch.png)
+![](img/simplesearch.png)
 *Рис. 3: Поиск максимума простым перебором* 
 
 ```python
@@ -61,7 +61,7 @@ def simple_max_search(rand_vec):
             max = vec_elem
 ```
 
-![](./img/sumfunc.png)
+![](img/sumfunc.png)
 *Рис. 4: Среднее арифметическое* 
 
 ```python
@@ -73,7 +73,7 @@ def sum_func(rand_vec):
    # print(sum_/len(rand_vec))
 ```
 
-![](./img/matrixmult.png)
+![](img/matrixmult.png)
 *Рис. 5: Умножение матриц* 
 
 ```python
