@@ -133,15 +133,16 @@ class List:
             current = next_node
         self.head = prev
 
-    def find(self, target):
+    def find(self, value):
         current = self.head
         index = 0
         while current:
-            if current.data == target:
+            if current.data == value:
                 return index
             current = current.next
             index += 1
         return -1
+
     def display(self):
         current = self.head
         while current:
@@ -152,8 +153,8 @@ class List:
 
 def intersect_lists(list1, list2):
     intersection = List()
-
     current1 = list1.head
+
     while current1:
         current2 = list2.head
         while current2:
@@ -179,20 +180,93 @@ def multiply_lists(list1, list2):
     return result
 
 
-my_list = List()
-my_list.push_back(1)
-my_list.push_back(2)
-my_list.push_back(3)
+def main():
+    my_list = List()
 
-for item in my_list:
-    print(item, end=' -> ')
-print("None")
+    while True:
+        print("\nВыберите операцию:")
+        print("1. Добавить элемент в начало")
+        print("2. Добавить элемент в конец")
+        print("3. Удалить элемент с начала")
+        print("4. Удалить элемент с конца")
+        print("5. Реверс списка")
+        print("6. Найти элемент")
+        print("7. Вывести список")
+        print("8. Пересечение двух списков")
+        print("9. Умножение двух списков")
+        print("10. Очистить список")
+        print("0. Выход")
 
-print("Element at index 1:", my_list.at(1))
-my_list.push(4, 2)
-my_list.display()  # 1 -> 2 -> 4 -> 3 -> None
-removed_data = my_list.pop(2)
-print("Removed data:", removed_data)
-my_list.display()  # 1 -> 2 -> 3 -> None
-my_list.clear()
-my_list.display()  # None
+        choice = input("Введите ваш выбор: ")
+
+        if choice == '1':
+            data = int(input("Введите данные: "))
+            my_list.push_front(data)
+        elif choice == '2':
+            data = int(input("Введите данные: "))
+            my_list.push_back(data)
+        elif choice == '3':
+            data = my_list.pop_front()
+            print(f"Удаленный элемент: {data}")
+        elif choice == '4':
+            data = my_list.pop_back()
+            print(f"Удаленный элемент: {data}")
+        elif choice == '5':
+            my_list.reverse()
+            print("Список перевернут.")
+        elif choice == '6':
+            value = int(input("Введите значение для поиска: "))
+            index = my_list.find(value)
+            if index != -1:
+                print(f"Значение {value} найдено по индексу {index}.")
+            else:
+                print(f"Значение {value} не найдено.")
+        elif choice == '7':
+            my_list.display()
+        elif choice == '8':
+            list1 = List()
+            list2 = List()
+            input_list1 = input("Введите элементы для первого списка через пробел (например, 1 2 3): ")
+            input_list2 = input("Введите элементы для второго списка через пробел (например, 4 5 6): ")
+
+            elements1 = [int(item) for item in input_list1.split()]
+            elements2 = [int(item) for item in input_list2.split()]
+
+            for item in elements1:
+                list1.push_back(item)
+            for item in elements2:
+                list2.push_back(item)
+
+            intersection = intersect_lists(list1, list2)
+            print("Пересечение двух списков:")
+            intersection.display()
+
+        elif choice == '9':
+            list1 = List()
+            list2 = List()
+            input_list1 = input("Введите элементы для первого списка через пробел (например, 1 2 3): ")
+            input_list2 = input("Введите элементы для второго списка через пробел (например, 4 5 6): ")
+
+            elements1 = [int(item) for item in input_list1.split()]
+            elements2 = [int(item) for item in input_list2.split()]
+
+            for item in elements1:
+                list1.push_back(item)
+            for item in elements2:
+                list2.push_back(item)
+
+            result_list = multiply_lists(list1, list2)
+            print("Результат умножения двух списков:")
+            result_list.display()
+
+        elif choice == '10':
+            my_list.clear()
+            print("Список очищен.")
+        elif choice == '0':
+            break
+        else:
+            print("Неверный выбор. Пожалуйста, выберите допустимую операцию.")
+
+
+if __name__ == "__main__":
+    main()
