@@ -5,7 +5,6 @@ class Node:
 
 
 class LinkedList:
-    size = 0
 
     def __init__(self):
         self.head = None
@@ -33,40 +32,37 @@ class LinkedList:
 
     def pop_front(self):
         if self.size == 0:
-            print("empty")
             return None
         elif self.size == 1:
-            pooped_data = self.head.data
+            poped_data = self.head.data
             self.head = None
             self.size -= 1
-            return pooped_data
+            return poped_data
         else:
-            pooped_data = self.head.data
+            poped_data = self.head.data
             self.head = self.head.next
             self.size -= 1
-            return pooped_data
+            return poped_data
 
     def pop_back(self):
         if self.size == 0:
-            print("empty")
             return None
         elif self.size == 1:
-            pooped_data = self.head.data
+            poped_data = self.head.data
             self.head = None
             self.size -= 1
-            return pooped_data
+            return poped_data
         else:
             current = self.head
             while current.next.next is not None:
                 current = current.next
-            pooped_data = current.next.data
+            poped_data = current.next.data
             current.next = None
             self.size -= 1
-            return pooped_data
+            return poped_data
 
     def at(self, index):
         if self.size == 0:
-            print("empty")
             return None
         else:
             if index < 0:
@@ -79,26 +75,21 @@ class LinkedList:
             return current.data
 
     def push(self, data, index):
-        if self.size == 0:
-            print("empty")
-            return None
+        if index == 0:
+            self.push_front(data)
+        elif index == self.size:
+            self.push_back(data)
         else:
-            if index == -1:
-                self.push_front(data)
-            elif index == self.size:
-                self.push_back(data)
-            else:
-                new_node = Node(data)
-                current = self.head
-                for i in range(index - 2):
-                    current = current.next
-                new_node.next = current.next
-                current.next = new_node
-            self.size += 1
+            new_node = Node(data)
+            current = self.head
+            for i in range(index - 2):
+                current = current.next
+            new_node.next = current.next
+            current.next = new_node
+        self.size += 1
 
     def pop(self, index):
         if self.size == 0:
-            print("empty")
             return None
         else:
             if index == -1:
@@ -111,14 +102,16 @@ class LinkedList:
                     current = current.next
                 to_remove = current.next
                 current.next = to_remove.next
-                pooped_data = to_remove.data
+                poped_data = to_remove.data
                 del to_remove
                 self.size -= 1
-                return pooped_data
+                return poped_data
 
     def print_list(self):
         if self.size == 0:
-            print("empty")
+            print('\n')
+            print("List is empty")
+            print('\n')
         else:
             current = self.head
             print("\n")
@@ -136,8 +129,11 @@ class LinkedList:
         self.size = 0
 
     def remove_unique_elements(self):
+        """Написать функцию, которая удаляет из списка элементы, входящие в него только один раз."""
         if self.size == 0:
-            print("empty")
+            print('\n')
+            print("List is empty")
+            print('\n')
         else:
             seen = set()
             duplicates = set()
@@ -157,8 +153,14 @@ class LinkedList:
                     self.size -= 1
                 else:
                     current = current.next
+            if self.size == 1:
+                to_remove = self.head
+                self.head = self.head.next
+                del to_remove
+                self.size = 0
 
     def even_and_odd(self):
+        """Написать функцию, которая по списку L строит два новых списка: L1 – из четных и L2 – из нечетных элементов списка L."""
         if linked_list.head is None:
             print("empty")
         even_list = LinkedList()
@@ -178,25 +180,25 @@ class LinkedList:
 
 
 def menu():
-    print("1   Push Front")
-    print("2   Push Back")
-    print("3   Push at Index")
-    print("4   Pop Front")
-    print("5   Pop Back")
-    print("6   Pop at Index")
-    print("7   Print List")
-    print("8   List Length")
-    print("9   Clear List")
-    print("10   Remove unique elements")
-    print("11   Get even and odd lists")
-    print("0   Exit")
+    print("1.     Push Front")
+    print("2.     Push Back")
+    print("3.     Push at Index")
+    print("4.     Pop Front")
+    print("5.     Pop Back")
+    print("6.     Pop at Index")
+    print("7.     Print List")
+    print("8.     List Length")
+    print("9.     Clear List")
+    print("10.    Remove unique elements")
+    print("11.    Get even and odd lists")
+    print("0.     Exit")
 
 
 linked_list = LinkedList()
 
 while 1 > 0:
     menu()
-    task = input("Enter your wish (0-9): ")
+    task = input("Enter your wish (0-11): ")
 
     if task == "0":
         print("\n")
