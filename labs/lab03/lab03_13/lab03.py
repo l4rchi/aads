@@ -10,11 +10,6 @@ class Node:
     def __str__(self) -> str:
         return str(self.val)
 
-    def __del__(self):
-        print("Хуй")
-        del self
-
-
 class LinkedList:
     def __init__(self, node=Node):
         self.head = None
