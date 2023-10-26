@@ -19,7 +19,7 @@ class CircularList():
         if self.head is None:
             return 0
 
-        if self.head.next is None:
+        if self.head.next is not None:
             return 1
 
         len = 1
