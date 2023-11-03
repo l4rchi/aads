@@ -1,0 +1,33 @@
+from doublylinkedlist import Node, DoublyLinkedList
+
+a = DoublyLinkedList()
+a.push_front(5)
+a.push_front(3)
+a.push_front(6)
+a.push_front(7)
+a.push_back(-1)
+a.print_linkedlist()
+print('haha')
+a.reverse_list()
+a.print_linkedlist()
+print('haha')
+a.push_before(232,2)
+a.print_linkedlist()
+print('haha')
+a.pop(2)
+a.print_linkedlist()
+print('haha')
+a.pop_before(2)
+a.print_linkedlist()
+print('haha')
+b, c = a.listsplit()
+b.print_linkedlist()
+print('haha')
+c.print_linkedlist()
+print('hahahh')
+a.print_linkedlist()
+print('haha')
+a.simplenum()
+
+
+
