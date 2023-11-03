@@ -137,84 +137,83 @@ class Node:
 class BinarySearchTree:
     def __init__(self):
         self.root = None
+        
 
     def __str__(self):
-        return self.display()
-        # if self.is_empty():
-        #     text = "binary search tree is empty: " + str(self.root)
-        # else:
-        #     text = "binary search tree size = " + str(self.size) + "\ntop is = " + str(self.root.data) + "\nbinary search tree: "
-        #     temp = self.root
-        #     while temp:
-        #         text += str(temp.data) + " "
-        #         temp = temp.next
-        # return text
+        # return self.display()
+        if self.is_empty(self.root):
+            text = "binary search tree is empty: " + str(self.root)
+        else:
+            text = "root is = " + str(self.root.data) + "\nbinary search tree: "
+            print(self.root.left)
+            print(self.root.right)
+        return text
 
-    def display(self):
-        lines, *_ = self._display_aux()
-        for line in lines:
-            print(line)
-    def _display_aux(self):
-        """Returns list of strings, width, height, and horizontal coordinate of the root."""
-        # No child.
-        if self.is_empty():
-            line = '%s' % self.root
-            width = len(line)
-            height = 1
-            middle = width // 2
-            return [line], width, height, middle
-        # Only left child.
-        if self.right is None:
-            lines, n, p, x = self.left._display_aux()
-            s = '%s' % self.root
-            u = len(s)
-            first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
-            second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
-            shifted_lines = [line + u * ' ' for line in lines]
-            return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
-        # Only right child.
-        if self.left is None:
-            lines, n, p, x = self.right._display_aux()
-            s = '%s' % self.root
-            u = len(s)
-            first_line = s + x * '_' + (n - x) * ' '
-            second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
-            shifted_lines = [u * ' ' + line for line in lines]
-            return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
-        # Two children.
-        left, n, p, x = self.left._display_aux()
-        right, m, q, y = self.right._display_aux()
-        s = '%s' % self.root
-        u = len(s)
-        first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
-        second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
-        if p < q:
-            left += [n * ' '] * (q - p)
-        elif q < p:
-            right += [m * ' '] * (p - q)
-        zipped_lines = zip(left, right)
-        lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
-        return lines, n + m + u, max(p, q) + 2, n + u // 2
+    # def display(self):
+    #     lines, *_ = self._display_aux()
+    #     for line in lines:
+    #         print(line)
+    # def _display_aux(self):
+    #     """Returns list of strings, width, height, and horizontal coordinate of the root."""
+    #     # No child.
+    #     if self.is_empty():
+    #         line = '%s' % self.root
+    #         width = len(line)
+    #         height = 1
+    #         middle = width // 2
+    #         return [line], width, height, middle
+    #     # Only left child.
+    #     if self.right is None:
+    #         lines, n, p, x = self.left._display_aux()
+    #         s = '%s' % self.root
+    #         u = len(s)
+    #         first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
+    #         second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
+    #         shifted_lines = [line + u * ' ' for line in lines]
+    #         return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
+    #     # Only right child.
+    #     if self.left is None:
+    #         lines, n, p, x = self.right._display_aux()
+    #         s = '%s' % self.root
+    #         u = len(s)
+    #         first_line = s + x * '_' + (n - x) * ' '
+    #         second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
+    #         shifted_lines = [u * ' ' + line for line in lines]
+    #         return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
+    #     # Two children.
+    #     left, n, p, x = self.left._display_aux()
+    #     right, m, q, y = self.right._display_aux()
+    #     s = '%s' % self.root
+    #     u = len(s)
+    #     first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
+    #     second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+    #     if p < q:
+    #         left += [n * ' '] * (q - p)
+    #     elif q < p:
+    #         right += [m * ' '] * (p - q)
+    #     zipped_lines = zip(left, right)
+    #     lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
+    #     return lines, n + m + u, max(p, q) + 2, n + u // 2
 
-    def is_empty(self):
-        if self.root == None:
+    def is_empty(self, root):
+        if root == None:
             return True
         else:
             return False
         
-    def add(self, data):
-        item = Node(data)
-        if self.is_empty():
-            self.root = item
+    def add(self, root, data):
+        if root == None:
+            root = Node(data)
+            print(root.data)
         # if type(data)!=int:
         #     raise Exception("The tree can't include non-integer elements")
-        elif self.root == data:
+        elif root.data == data:
             raise Exception("Such an element has already been added to the tree")
         else:
-            if data < self.left:
-                self.left.add(item)
+            if data < root.data:
+                root.left = self.add(root.left, data)
             else:
-                self.right.add(item)
+                root.right = self.add(root.right, data)
 
 # try:
 #     closing_brackets("({[()]}}")
@@ -279,13 +278,13 @@ class BinarySearchTree:
 # Взаимодействие с пользователем
 x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop\n")
 mytree = BinarySearchTree()
-while (x):
+while (True):
     x = x.lower()
     match x:
         case "menu":
             print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop")
         case "show":
-            mytree.display()
+            print(mytree)
         case "add":
             message = input("Если вы хотите линейно заполнить стек: введите Fill, если же добавить один элемент: введите Add\n")
             if not message.isalpha():
@@ -334,7 +333,7 @@ while (x):
                             print("Стек успешно заполнен")
                 elif message == "add":
                     item = input("Введите элемент: ")
-                    mytree.add(item)
+                    mytree.add(mytree.root, item)
                     print("Вы добавили элемент", item)
                 else:
                     print("YOU LOSER")
