@@ -202,9 +202,12 @@ class BinarySearchTree:
             return False
         
     def add(self, root, data):
-        if root == None:
+        if self.root == None:
+            self.root = Node(data)
+            return self
+        elif root == None:
             root = Node(data)
-            print(root.data)
+            return root
         # if type(data)!=int:
         #     raise Exception("The tree can't include non-integer elements")
         elif root.data == data:
@@ -214,6 +217,7 @@ class BinarySearchTree:
                 root.left = self.add(root.left, data)
             else:
                 root.right = self.add(root.right, data)
+                print(root.right, data)
 
 # try:
 #     closing_brackets("({[()]}}")
@@ -275,6 +279,9 @@ class BinarySearchTree:
 # finally:
 #     code with/without 
 
+
+
+    
 # Взаимодействие с пользователем
 x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop\n")
 mytree = BinarySearchTree()
@@ -374,6 +381,10 @@ while (True):
         case "stop":
             break
     x = input("Введите еще команду: ")
+
+```
+
+```python
 
 ```
 
