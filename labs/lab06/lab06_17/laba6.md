@@ -44,18 +44,18 @@ class Node:
     def __init__(self, data, left = None, right = None)
 
 class BinarySearchTree:
-    def __init__(self) #инициализация стека
+    def __init__(self) #инициализация дерева
 
-    def __str__(self) #вывод стека
+    def __str__(self) #вывод дерева
 
-    def push_front(self, data) #запись элемента в стек
+    def push_front(self, data) #добавление элемента в дерево
     
-    def pop_front(self) #удаление элемента из стека
+    def pop_front(self) #удаление элемента из дерева
 
-    def clear(self) #очистка стека
+    def clear(self) #очистка дерева
     
     #additions
-    def remove(self, length) #удаление нескольких верхних элементов стека
+    def remove(self, length) #удаление нескольких элементов дерева
     
 #individuals
 
@@ -138,86 +138,98 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
         
+    # def print(self, root, level):
+    #     if self.is_empty(self.root):
+    #         print("binary search tree is empty:", self.root)
+    #     else:
+    #         if self.is_empty(root):
+    #             print("    " * level + "None")
+    #         else:
+    #             self.print(root.right, level+1)
+    #             print("    " * level + str(root.data) + "<")
+    #             self.print(root.left, level+1)
 
     def __str__(self):
-        # return self.display()
         if self.is_empty(self.root):
-            text = "binary search tree is empty: " + str(self.root)
+            return "binary search tree is empty: " + str(self.root)
         else:
-            text = "root is = " + str(self.root.data) + "\nbinary search tree: "
-            print(self.root.left)
-            print(self.root.right)
-        return text
+            lines, *_ = self.print(self.root)
+            for line in lines:
+                print(line)
+            return ""
 
-    # def display(self):
-    #     lines, *_ = self._display_aux()
-    #     for line in lines:
-    #         print(line)
-    # def _display_aux(self):
-    #     """Returns list of strings, width, height, and horizontal coordinate of the root."""
-    #     # No child.
-    #     if self.is_empty():
-    #         line = '%s' % self.root
-    #         width = len(line)
-    #         height = 1
-    #         middle = width // 2
-    #         return [line], width, height, middle
-    #     # Only left child.
-    #     if self.right is None:
-    #         lines, n, p, x = self.left._display_aux()
-    #         s = '%s' % self.root
-    #         u = len(s)
-    #         first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
-    #         second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
-    #         shifted_lines = [line + u * ' ' for line in lines]
-    #         return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
-    #     # Only right child.
-    #     if self.left is None:
-    #         lines, n, p, x = self.right._display_aux()
-    #         s = '%s' % self.root
-    #         u = len(s)
-    #         first_line = s + x * '_' + (n - x) * ' '
-    #         second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
-    #         shifted_lines = [u * ' ' + line for line in lines]
-    #         return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
-    #     # Two children.
-    #     left, n, p, x = self.left._display_aux()
-    #     right, m, q, y = self.right._display_aux()
-    #     s = '%s' % self.root
-    #     u = len(s)
-    #     first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
-    #     second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
-    #     if p < q:
-    #         left += [n * ' '] * (q - p)
-    #     elif q < p:
-    #         right += [m * ' '] * (p - q)
-    #     zipped_lines = zip(left, right)
-    #     lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
-    #     return lines, n + m + u, max(p, q) + 2, n + u // 2
+    def print(self, root):
+        """Returns list of strings, width, height, and horizontal coordinate of the root."""
+        # No child.
+        if self.is_empty(root.right) and self.is_empty(root.left):
+            line = "%s" % root.data
+            width = len(line)
+            height = 1
+            middle = width // 2
+            return [line], width, height, middle
+        # Only left child.
+        if self.is_empty(root.right):
+            lines, n, p, x = self.print(root.left)
+            s = "%s" % root.data
+            u = len(s)
+            first_line = (x + 1) * " " + (n - x - 1) * "_" + s
+            second_line = x * " " + "/" + (n - x - 1 + u) * " "
+            shifted_lines = [line + u * " " for line in lines]
+            return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
+        # Only right child.
+        if self.is_empty(root.left):
+            lines, n, p, x = self.print(root.right)
+            s = "%s" % root.data
+            u = len(s)
+            first_line = s + x * "_" + (n - x) * " "
+            second_line = (u + x) * " " + "\\" + (n - x - 1) * " "
+            shifted_lines = [u * " " + line for line in lines]
+            return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
+        # Two children.
+        left, n, p, x = self.print(root.left)
+        right, m, q, y = self.print(root.right)
+        s = "%s" % root.data
+        u = len(s)
+        first_line = (x + 1) * " " + (n - x - 1) * "_" + s + y * "_" + (m - y) * " "
+        second_line = x * " " + "/" + (n - x - 1 + u + y) * " " + "\\" + (m - y - 1) * " "
+        if p < q:
+            left += [n * " "] * (q - p)
+        elif q < p:
+            right += [m * " "] * (p - q)
+        zipped_lines = zip(left, right)
+        lines = [first_line, second_line] + [a + u * " " + b for a, b in zipped_lines]
+        return lines, n + m + u, max(p, q) + 2, n + u // 2
 
     def is_empty(self, root):
         if root == None:
             return True
         else:
             return False
-        
-    def add(self, root, data):
-        if self.root == None:
+            
+    def add(self, data):
+        if self.is_empty(self.root):
             self.root = Node(data)
-            return self
-        elif root == None:
-            root = Node(data)
-            return root
+        else:
+            self.add_not_empty(self.root, data)
+    
+    def add_not_empty(self, root, data):
+        if root.data == data:
+            raise Exception("Such an element has already been added to the tree")
         # if type(data)!=int:
         #     raise Exception("The tree can't include non-integer elements")
-        elif root.data == data:
-            raise Exception("Such an element has already been added to the tree")
-        else:
-            if data < root.data:
-                root.left = self.add(root.left, data)
+        elif data < root.data:
+            if self.is_empty(root.left):
+                root.left = Node(data)
             else:
-                root.right = self.add(root.right, data)
-                print(root.right, data)
+                self.add_not_empty(root.left, data)
+        else:
+            if self.is_empty(root.right):
+                root.right = Node(data)
+            else:
+                self.add_not_empty(root.right, data)
+                
+    def pop(self, data):
+
 
 # try:
 #     closing_brackets("({[()]}}")
@@ -235,15 +247,23 @@ class BinarySearchTree:
             self.size -= 1
             return item.data
 
-    def clear(self):
-        if self.is_empty():
-            return "list is already empty"
+    def direct_traversal(self):
+        
+    def symmetric_traversal(self):
+
+    def reverse_traversal(self):
+
+    
+    def find_item(self, data): #поиск элемента по значению
         temp = self.root
-        while temp != None:
-            temp.data = None
+        while (temp != None and temp.data != data):
             temp = temp.next
-        self.size = 0
-        self.root = None
+        if temp == None:
+            return False
+        else:
+            return True
+
+    def depth(self):
 
     #additions
     def remove(self, length):
@@ -255,15 +275,15 @@ class BinarySearchTree:
         else:
             for i in range(0, length):
                 temp = self.pop_front()
-                
-    def find_item(self, data): #поиск элемента по значению
-        temp = self.root
-        while (temp != None and temp.data != data):
-            temp = temp.next
-        if temp == None:
-            return False
-        else:
-            return True
+
+    def clear(self):
+        if self.is_empty(self.root):
+            return "tree is already empty"
+        # temp = self.root
+        # while temp != None:
+        #     temp.data = None
+        #     temp = temp.next
+        self.root = None
 
 # #individuals
 # case "]":
@@ -283,17 +303,18 @@ class BinarySearchTree:
 
     
 # Взаимодействие с пользователем
-x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop\n")
+# x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop\n")
+x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите закончить: введите Stop\n")
 mytree = BinarySearchTree()
-while (True):
+while True:
     x = x.lower()
     match x:
         case "menu":
-            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop")
+            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите закончить: введите Stop\n")
         case "show":
             print(mytree)
         case "add":
-            message = input("Если вы хотите линейно заполнить стек: введите Fill, если же добавить один элемент: введите Add\n")
+            message = input("Если вы хотите линейно заполнить дерево: введите Fill, если же добавить один элемент: введите Add\n")
             if not message.isalpha():
                 print("YOU LOSER")
                 print("Надо было ввести команду :З")
@@ -304,43 +325,22 @@ while (True):
                         print("YOU LOSER")
                         print("Надо было ввести число :З")
                     else:
-                        print("Если вдруг вы устанете заполнять стек и захотите прервать процесс: введите ~I'm LoSeR~")
+                        print("Если вдруг вы устанете заполнять дерево и захотите прервать процесс: введите ~I'm LoSeR~")
                         count_elements = 0
                         length = int(length)
-                        flag = True
                         for i in range(0, length):
-                            if not flag:
-                                break
                             item = input("Введите элемент: ")
                             if item == "~I'm LoSeR~":
-                                while True:
-                                    exit = input("Если вы хотите закончить заполнение стека: введите Break, если добавить элемент ~I'm LoSeR~: введите Add\n")
-                                    if not exit.isalpha():
-                                        print("YOU LOSER")
-                                        print("Надо было ввести команду :З")
-                                        print("Попробуйте еще раз")
-                                    else:
-                                        exit = exit.lower() 
-                                        if exit == "break":
-                                            print("Элементы успешно добавились, процесс прерван")
-                                            flag = False
-                                            break
-                                        elif exit == "add":
-                                            result = mytree.push_front(item)
-                                            count_elements += 1
-                                            break
-                                        else:
-                                            print("YOU LOSER")
-                                            print("Надо было ввести команду :З")
-                                            print("Попробуйте еще раз")
+                                print("Элементы успешно добавились, процесс прерван")
+                                break
                             else:
-                                mytree.push_front(item)
+                                mytree.add(item)
                                 count_elements += 1
                         if count_elements == length:
-                            print("Стек успешно заполнен")
+                            print("Дерево успешно заполнено")
                 elif message == "add":
                     item = input("Введите элемент: ")
-                    mytree.add(mytree.root, item)
+                    mytree.add(item)
                     print("Вы добавили элемент", item)
                 else:
                     print("YOU LOSER")
@@ -354,38 +354,48 @@ while (True):
                 message = message.lower()
                 if message == "remove":
                     length = input("Введите количество элементов для удаления: ")
-                    result = mytree.remove(length)
+       # юююююююю             result = mytree.remove(length)
                     if result == "ErRoR":
                         print("YOU LOSER")
                         print("В следующий раз стоит вводить корректное количество элементов для удаления :З")
                     elif result == "empty":
-                        print("А что вы собрались удалять в пустом стеке (｡· v ·｡)?")
+                        print("А что вы собрались удалять в пустом дереве (｡· v ·｡)?")
                     else:
                         print("Вы удалили", length, "элементов")
                 elif message == "pop":
                     result = mytree.pop_front()
                     if result == "ErRoR":
                         print("YOU LOSER")
-                        print("А что вы собрались удалять в пустом стеке (｡· v ·｡)?")
+                        print("А что вы собрались удалять в пустом дереве (｡· v ·｡)?")
                     else:
                         print("Вы удалили элемент", result)
                 else:
                         print("YOU LOSER")
                         print("Вы ввели неправильную команду :З")
         case "clear":
-            if mytree.clear() == "list is already empty":
+            if mytree.clear() == "tree is already empty":
                 print("YOU LOSER")
-                print("Не стоит пытаться очистить пустой стек :З")
+                print("Не стоит пытаться очистить пустое дерево :З")
             else:
-                print("Вы очистили стек, его элементы больше не доступны :(")
+                print("Вы очистили дерево, его элементы больше не доступны :(")
         case "stop":
             break
+        case _:
+            print("Научись вводить команды правильно :З")
     x = input("Введите еще команду: ")
 
 ```
 
 ```python
-
+for x in range(0,2):
+    for y in range(0,2):
+        for z in range(0,2):
+            for w in range(0,2):
+                for e in range(0,2):
+                    f1 = (not(not(y) or ((y and not(z)) and (y or not(e)))) or ((x and w) or (not(w) and x)))
+                    f2 = (((not(x) or not(y) or not(z)) and (x or (y and z))) and (not(w) or ((e and w) or (w and not(e)))))
+                    if f1 != f2:
+                        print(x, y, z, w, e)
 ```
 
 ```python
