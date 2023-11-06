@@ -44,25 +44,54 @@ class Node:
     def __init__(self, data, left = None, right = None)
 
 class BinarySearchTree:
+    
     def __init__(self) #инициализация дерева
 
     def __str__(self) #вывод дерева
 
-    def push_front(self, data) #добавление элемента в дерево
+    def print(self, root) #вспомогательная функция для вывода дерева
     
-    def pop_front(self) #удаление элемента из дерева
-
-    def clear(self) #очистка дерева
+    def is_empty(self, root) #проверка дерева на пустоту
+    
+    def add(self, data) #добавление элемента в дерево
+    
+    def add_root(self, root, data) #вспомогательная функция для добавления элемента в дерево
+    
+    def preorder_traversal(self) #прямой обход дерева
+    
+    def preorder_traversal_root(self, root, result) #вспомогательная функция для прямого обхода дерева
+    
+    def inorder_traversal(self) #симметричный обход дерева
+    
+    def inorder_traversal_root(self, root, result) #вспомогательная функция для симметричного обхода дерева
+    
+    def postorder_traversal(self) #обратный обход дерева
+    
+    def postorder_traversal_root(self, root, result) #вспомогательная функция для обратного обхода дерева
+    
+    def find_item(self, data): #поиск элемента по значению в дереве
+    
+    def find_item_root(self, root, data, path) #вспомогательная функция для поиска элемента по значению в дереве
+    
+    def remove(self, data) #удаление элемента по значению из дерева
+    
+    def remove_root(self, root, data) #вспомогательная функция для удаления элемента по значению из дерева
+    
+    def depth(self, root, level) #подсчет глубины дерева
     
     #additions
-    def remove(self, length) #удаление нескольких элементов дерева
+    def clear(self): #очистка дерева
     
-#individuals
+    def clear_root(self, root) #вспомогательная функция для очистки дерева
 
+    #individuals
+    def product_of_elements_even_levels(self) #произведение элементов всех четных уровней
+
+    def product_of_elements_even_levels_root(self, root, result, flag) #вспомогательная функция для произведения элементов всех четных уровней
     
 #Взаимодействие с пользователем
 x = input("...")
-while (x):
+while True:
     ///код
     match x:
         case "menu":
@@ -71,12 +100,27 @@ while (x):
         case "show":
             ///код
 
+        case "is empty":
+            ///код
+            
         case "add":
             ///код
-        
+
+        case "traversal":
+            ///код
+            
+        case "find item":
+            ///код
+            
         case "remove":
             ///код
-
+        
+        case "depth":
+            ///код
+            
+        case "product evel levels":
+            ///код
+            
         case "clear":
             ///код
         
@@ -122,9 +166,129 @@ while (x):
     * Удаление элемента из дерева
     * Обход дерева.
 9. *Как программно реализуется алгоритм операции обхода дерева?* <br>
+```python
+def preorder_traversal(self): #прямой обход дерева
+    if self.is_empty(self.root):
+        raise TypeError("Empty tree")
+    result = []
+    self.preorder_traversal_root(self.root, result)
+    return result
+
+def preorder_traversal_root(self, root, result):
+    if not self.is_empty(root):
+        result.append(root.data)
+        self.preorder_traversal_root(root.left, result)
+        self.preorder_traversal_root(root.right, result)
+        return result
+        
+def inorder_traversal(self): #симметричный обход дерева
+    if self.is_empty(self.root):
+        raise TypeError("Empty tree")
+    result = []
+    self.inorder_traversal_root(self.root, result)
+    return result
+
+def inorder_traversal_root(self, root, result):
+    if not self.is_empty(root):
+        self.inorder_traversal_root(root.left, result)
+        result.append(root.data)
+        self.inorder_traversal_root(root.right, result)
+        return result
+        
+def postorder_traversal(self): #обратный обход дерева
+    if self.is_empty(self.root):
+        raise TypeError("Empty tree")
+    result = []
+    self.postorder_traversal_root(self.root, result)
+    return result
+
+def postorder_traversal_root(self, root, result):
+    if not self.is_empty(root):
+        self.postorder_traversal_root(root.left, result)
+        self.postorder_traversal_root(root.right, result)
+        result.append(root.data)
+        return result
+```
 10. *Как программно реализуется алгоритм операции добавления элемента в дерево?* <br>
-11. *Как программно реализуется алгоритм операции удаления элемента из дерева?* <br>
-12. *Как программно реализуется  алгоритм операции поиска элемента в дереве?* <br>
+```python
+def add(self, data):
+    if not data.isdigit():
+        raise TypeError("Only numbers can be added to the tree")
+    data = int(data)
+    if self.is_empty(self.root):
+        self.root = Node(data)
+    else:
+        self.add_root(self.root, data)
+    
+def add_root(self, root, data):
+    if root.data == data:
+        raise ValueError("Such an element has already been added to the tree")
+    elif data < root.data:
+        if self.is_empty(root.left):
+            root.left = Node(data)
+        else:
+            self.add_root(root.left, data)
+    else:
+        if self.is_empty(root.right):
+            root.right = Node(data)
+        else:
+            self.add_root(root.right, data)
+```
+12. *Как программно реализуется алгоритм операции удаления элемента из дерева?* <br>
+```python
+def remove(self, data):
+    if not data.isdigit():
+        raise ValueError("Only numbers can be removed from the tree")
+    data = int(data)
+    if self.is_empty(self.root):
+        raise TypeError("Empty tree")
+    return self.remove_root(self.root, data)
+    
+def remove_root(self, root, data):
+    if self.is_empty(root):
+        return root
+    if data < root.data:
+        root.left = self.remove_root(root.left, data)
+    elif data > root.data:
+        root.right = self.remove_root(root.right, data)
+    else:
+        if self.is_empty(root.right):
+            return root.left
+        elif self.is_empty(root.left):
+            return root.right
+        else:
+            temp = root.right
+            while not self.is_empty(temp.left):
+                temp = temp.left
+            root.data = temp.data
+        root.right = self.remove_root(root.right, temp.data)
+return root
+```
+13. *Как программно реализуется  алгоритм операции поиска элемента в дереве?* <br>
+```python
+def find_item(self, data):
+    if self.is_empty(self.root):
+        raise TypeError("Empty tree")
+    if not data.isdigit():
+        raise ValueError("Only integers can be searched in the tree")
+    data = int(data)
+    path = "root"
+    if self.root.data == data:
+        return path
+    path = self.find_item_root(self.root, data, path)
+    return path
+
+def find_item_root(self, root, data, path):
+    if self.is_empty(root):
+        raise Exception("ErRoR 404")
+    if root.data == data:
+        return path
+    if data < root.data:
+        path = self.find_item_root(root.left, data, path + "->left")
+    else:
+        path = self.find_item_root(root.right, data, path + "->right")
+    return path
+```
 <!-- #endregion -->
 
 ```python
@@ -137,17 +301,6 @@ class Node:
 class BinarySearchTree:
     def __init__(self):
         self.root = None
-        
-    # def print(self, root, level):
-    #     if self.is_empty(self.root):
-    #         print("binary search tree is empty:", self.root)
-    #     else:
-    #         if self.is_empty(root):
-    #             print("    " * level + "None")
-    #         else:
-    #             self.print(root.right, level+1)
-    #             print("    " * level + str(root.data) + "<")
-    #             self.print(root.left, level+1)
 
     def __str__(self):
         if self.is_empty(self.root):
@@ -207,112 +360,174 @@ class BinarySearchTree:
             return False
             
     def add(self, data):
+        if not data.isdigit():
+            raise TypeError("Only numbers can be added to the tree")
+        data = int(data)
         if self.is_empty(self.root):
             self.root = Node(data)
         else:
-            self.add_not_empty(self.root, data)
+            self.add_root(self.root, data)
     
-    def add_not_empty(self, root, data):
+    def add_root(self, root, data):
         if root.data == data:
-            raise Exception("Such an element has already been added to the tree")
-        # if type(data)!=int:
-        #     raise Exception("The tree can't include non-integer elements")
+            raise ValueError("Such an element has already been added to the tree")
         elif data < root.data:
             if self.is_empty(root.left):
                 root.left = Node(data)
             else:
-                self.add_not_empty(root.left, data)
+                self.add_root(root.left, data)
         else:
             if self.is_empty(root.right):
                 root.right = Node(data)
             else:
-                self.add_not_empty(root.right, data)
-                
-    def pop(self, data):
+                self.add_root(root.right, data)
 
+    def preorder_traversal(self):
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        result = []
+        self.preorder_traversal_root(self.root, result)
+        return result
 
-# try:
-#     closing_brackets("({[()]}}")
-# except Exception as try_:
-#     print(try_)
-# finally:
-#     code with/without 
-   
-    def pop_front(self):
-        if self.is_empty():
-            return "ErRoR"
-        else:
-            item = self.root
-            self.root = item.next
-            self.size -= 1
-            return item.data
-
-    def direct_traversal(self):
+    def preorder_traversal_root(self, root, result):
+        if not self.is_empty(root):
+            result.append(root.data)
+            self.preorder_traversal_root(root.left, result)
+            self.preorder_traversal_root(root.right, result)
+            return result
         
-    def symmetric_traversal(self):
+    def inorder_traversal(self):
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        result = []
+        self.inorder_traversal_root(self.root, result)
+        return result
 
-    def reverse_traversal(self):
+    def inorder_traversal_root(self, root, result):
+        if not self.is_empty(root):
+            self.inorder_traversal_root(root.left, result)
+            result.append(root.data)
+            self.inorder_traversal_root(root.right, result)
+            return result
 
-    
+    def postorder_traversal(self):
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        result = []
+        self.postorder_traversal_root(self.root, result)
+        return result
+
+    def postorder_traversal_root(self, root, result):
+        if not self.is_empty(root):
+            self.postorder_traversal_root(root.left, result)
+            self.postorder_traversal_root(root.right, result)
+            result.append(root.data)
+            return result
+
     def find_item(self, data): #поиск элемента по значению
-        temp = self.root
-        while (temp != None and temp.data != data):
-            temp = temp.next
-        if temp == None:
-            return False
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        if not data.isdigit():
+            raise ValueError("Only integers can be searched in the tree")
+        data = int(data)
+        path = "root"
+        if self.root.data == data:
+            return path
+        path = self.find_item_root(self.root, data, path)
+        return path
+
+    def find_item_root(self, root, data, path):
+        if self.is_empty(root):
+            raise Exception("ErRoR 404")
+        if root.data == data:
+            return path
+        if data < root.data:
+            path = self.find_item_root(root.left, data, path + "->left")
         else:
-            return True
+            path = self.find_item_root(root.right, data, path + "->right")
+        return path
 
-    def depth(self):
-
+    def remove(self, data):
+        if not data.isdigit():
+            raise ValueError("Only numbers can be removed from the tree")
+        data = int(data)
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        return self.remove_root(self.root, data)
+    
+    def remove_root(self, root, data):
+        if self.is_empty(root):
+            return root
+        if data < root.data:
+            root.left = self.remove_root(root.left, data)
+        elif data > root.data:
+            root.right = self.remove_root(root.right, data)
+        else:
+            if self.is_empty(root.right):
+                return root.left
+            elif self.is_empty(root.left):
+                return root.right
+            else:
+                temp = root.right
+                while not self.is_empty(temp.left):
+                    temp = temp.left
+                root.data = temp.data
+                root.right = self.remove_root(root.right, temp.data)
+        return root
+    
+    def depth(self, root, level):
+        if self.is_empty(root):
+            return level
+        return max(self.depth(root.right, level + 1), self.depth(root.left, level + 1))
+    
     #additions
-    def remove(self, length):
-        length = int(length)
-        if length < 0 or length - 1 > self.size - 1:
-            return "ErRoR"
-        elif self.is_empty():
-            return "empty"
-        else:
-            for i in range(0, length):
-                temp = self.pop_front()
-
     def clear(self):
         if self.is_empty(self.root):
-            return "tree is already empty"
-        # temp = self.root
-        # while temp != None:
-        #     temp.data = None
-        #     temp = temp.next
+            raise TypeError("Empty tree")
+        self.clear_root(self.root)
         self.root = None
 
-# #individuals
-# case "]":
-#     if mytree.get_top() == "[":
-#         deleted = mytree.pop_front()
-#     else:
-#         raise Exception("error")
-#         break
-# try:
-#     closing_brackets("({[()]}}")
-# except Exception as try_:
-#     print(try_)
-# finally:
-#     code with/without 
+    def clear_root(self, root):
+        if not self.is_empty(root):
+            self.clear_root(root.left)
+            self.clear_root(root.right)
+            root.left = None
+            root.right = None
 
+    #individuals
+    def product_of_elements_even_levels(self):
+        if self.is_empty(self.root):
+            raise TypeError("Empty tree")
+        result = 1
+        result *= self.product_of_elements_even_levels_root(self.root, result, True)
+        return result
 
+    def product_of_elements_even_levels_root(self, root, result, flag):
+        if not self.is_empty(root):
+            if flag:
+                result *= root.data
+                result *= self.product_of_elements_even_levels_root(root.right, 1, not flag)
+                result *= self.product_of_elements_even_levels_root(root.left, 1, not flag)
+            else:
+                result *= self.product_of_elements_even_levels_root(root.right, 1, not flag)
+                result *= self.product_of_elements_even_levels_root(root.left, 1, not flag)
+        return result
 
-    
 # Взаимодействие с пользователем
-# x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть стек: введите Show\nЕсли вы хотите проверить пустой ли стек: введите Is Empty\nЕсли вы хотите добавить элементы в стек: введите Add\nЕсли вы хотите удалить элементы из стека: введите Remove\nЕсли вы хотите вывести вершину стека:введите Get Top\nЕсли вы хотите очистить стек: введите Clear\nЕсли вы хотите проверить наличие элемента в стеке: введите Is Item\nЕсли вы хотите развернуть стек: введите Reverse\nЕсли вы хотите закончить: введите Stop\n")
-x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите закончить: введите Stop\n")
+x = input("Добро пожаловать!\nЕсли вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите обойти дерево: введите Traversal\nЕсли вы хотите узнать распоожение элемента в дереве: введите Find Item\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите узнать глубину дерева: введите Depth\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите найти произведение элементов всех четных уровней: введите Product Even Levels\nЕсли вы хотите закончить: введите Stop\n")
 mytree = BinarySearchTree()
 while True:
     x = x.lower()
     match x:
         case "menu":
-            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите закончить: введите Stop\n")
+            print("Если вы хотите вывести набор команд: введите Menu\nЕсли вы хотите посмотреть дерево: введите Show\nЕсли вы хотите проверить пустое ли дерево: введите Is Empty\nЕсли вы хотите добавить элементы в дерево: введите Add\nЕсли вы хотите обойти дерево: введите Traversal\nЕсли вы хотите узнать распоожение элемента в дереве: введите Find Item\nЕсли вы хотите удалить элементы из дерева: введите Remove\nЕсли вы хотите узнать глубину дерева: введите Depth\nЕсли вы хотите очистить дерево: введите Clear\nЕсли вы хотите найти произведение элементов всех четных уровней: введите Product Even Levels\nЕсли вы хотите закончить: введите Stop\n")
         case "show":
             print(mytree)
+        case "is empty":
+            if mytree.is_empty(mytree.root):
+                print("Дерево пустое")
+            else:
+                print("Дерево не пустое")
         case "add":
             message = input("Если вы хотите линейно заполнить дерево: введите Fill, если же добавить один элемент: введите Add\n")
             if not message.isalpha():
@@ -327,22 +542,57 @@ while True:
                     else:
                         print("Если вдруг вы устанете заполнять дерево и захотите прервать процесс: введите ~I'm LoSeR~")
                         count_elements = 0
-                        length = int(length)
-                        for i in range(0, length):
+                        for i in range(0, int(length)):
                             item = input("Введите элемент: ")
                             if item == "~I'm LoSeR~":
                                 print("Элементы успешно добавились, процесс прерван")
                                 break
                             else:
-                                mytree.add(item)
+                                try:
+                                    mytree.add(item)
+                                except ValueError:
+                                    print("Такой элемент уже есть в дереве")
+                                except TypeError:
+                                    print("В дерево можно добавлять только числа")
                                 count_elements += 1
                         if count_elements == length:
                             print("Дерево успешно заполнено")
                 elif message == "add":
                     item = input("Введите элемент: ")
-                    mytree.add(item)
-                    print("Вы добавили элемент", item)
+                    flag = True
+                    try:
+                        mytree.add(item)
+                    except ValueError:
+                        flag = False
+                        print("Такой элемент уже есть в дереве")
+                    except TypeError:
+                        flag = False
+                        print("В дерево можно добавлять только числа")
+                    if flag:
+                        print("Вы добавили элемент", item)
                 else:
+                    print("YOU LOSER")
+                    print("Вы ввели неправильную команду :З")
+        case "traversal":
+            message = input("Если вы хотите посмотреть прямой обход дерева: введите Preorder, если симметричный: введите Inorder, если обратный: введите Postorder")
+            message = message.lower()
+            match message:
+                case "preorder":
+                    try:
+                        print("Прямой обход:", mytree.preorder_traversal())
+                    except TypeError:
+                        print(mytree)
+                case "inorder":
+                    try:
+                        print("Симметричный обход:", mytree.inorder_traversal())
+                    except TypeError:
+                        print(mytree)
+                case "postorder":
+                    try:
+                        print("Обратный обход:", mytree.postorder_traversal())
+                    except TypeError:
+                        print(mytree)
+                case _:
                     print("YOU LOSER")
                     print("Вы ввели неправильную команду :З")
         case "remove":
@@ -354,30 +604,64 @@ while True:
                 message = message.lower()
                 if message == "remove":
                     length = input("Введите количество элементов для удаления: ")
-       # юююююююю             result = mytree.remove(length)
-                    if result == "ErRoR":
+                    if not length.isdigit():
                         print("YOU LOSER")
                         print("В следующий раз стоит вводить корректное количество элементов для удаления :З")
-                    elif result == "empty":
-                        print("А что вы собрались удалять в пустом дереве (｡· v ·｡)?")
                     else:
-                        print("Вы удалили", length, "элементов")
+                        print("Если вдруг вы устанете удалять элементы и захотите прервать процесс: введите ~I'm LoSeR~")
+                        for i in range(0, int(length)):
+                            item = input("Введите элемент, который хотите удалить: ")
+                            if item == "~I'm LoSeR~":
+                                print("Элементы успешно удалены, процесс прерван")
+                                break
+                            else:
+                                try:
+                                    mytree.remove(item)
+                                    print("Вы удалили элемент", item)
+                                except TypeError:
+                                    print("YOU LOSER")
+                                    print("А что вы собрались удалять в пустом дереве (｡· v ·｡)?")
+                                except ValueError:
+                                    print("В дереве присутствуют только целочисленные элементы")
                 elif message == "pop":
-                    result = mytree.pop_front()
-                    if result == "ErRoR":
+                    item = input("Введите элемент, который хотите удалить: ")
+                    try:
+                        mytree.remove(item)
+                        print("Вы удалили элемент", item)
+                    except TypeError:
                         print("YOU LOSER")
                         print("А что вы собрались удалять в пустом дереве (｡· v ·｡)?")
-                    else:
-                        print("Вы удалили элемент", result)
+                    except ValueError:
+                        print("В дереве присутствуют только целочисленные элементы")
                 else:
                         print("YOU LOSER")
                         print("Вы ввели неправильную команду :З")
+        case "find item":
+            value = input("Введите элемент: ")
+            try:
+                result = mytree.find_item(value)
+                print("Элемент", value, "находится в списке по пути:", result)
+            except TypeError:
+                print("Что вы собрались искать в пустом дереве (｡· v ·｡)?")
+            except ValueError:
+                print("В дереве можно искать только целые числа")
+            except Exception:
+                print("YOU LOSER")
+                print("Такого элемента в дереве не нашлось :З")
+        case "depth":
+            print("Глубина дерева:", mytree.depth(mytree.root, 0))
+        case "product even levels":
+            try:
+                print("Произведение элементов всех четных уровней:", mytree.product_of_elements_even_levels())
+            except TypeError:
+                print("А что вы собрались умножать в пустом дереве (｡· v ·｡)?")
         case "clear":
-            if mytree.clear() == "tree is already empty":
+            try:
+                mytree.clear()
+                print("Вы очистили дерево, его элементы больше не доступны :(")
+            except TypeError:
                 print("YOU LOSER")
                 print("Не стоит пытаться очистить пустое дерево :З")
-            else:
-                print("Вы очистили дерево, его элементы больше не доступны :(")
         case "stop":
             break
         case _:
