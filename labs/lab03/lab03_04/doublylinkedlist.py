@@ -144,6 +144,7 @@ class DoublyLinkedList:
             for i in range(2, copy_head.data//2 + 1):
                 if copy_head.data % i == 0:
                     flag = True
+                    break
             if not flag:
                 print(copy_head.data)
             copy_head = copy_head.nextid
