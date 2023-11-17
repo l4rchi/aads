@@ -255,14 +255,34 @@ class RandomBinarySearchTree:
         elif data < root.data:
             if self.is_empty(root.left):
                 root.left = Node(data)
+                if self.depth(self.root.right, 0) - self.depth(self.root.left, 0) > 1:
+                    self.root = self.left_balance(self.root)
+                elif self.depth(self.root.right, 0) - self.depth(self.root.left, 0) < -1:
+                    self.root = self.right_balance(self.root)
             else:
                 self.add_root(root.left, data)
         else:
             if self.is_empty(root.right):
                 root.right = Node(data)
+                if self.depth(self.root.right, 0) - self.depth(self.root.left, 0) > 1:
+                    self.root = self.left_balance(self.root)
+                elif self.depth(self.root.right, 0) - self.depth(self.root.left, 0) < -1:
+                    self.root = self.right_balance(self.root)
             else:
                 self.add_root(root.right, data)
 
+    def right_balance(self, parent):
+        root = parent.left
+        parent.left = root.right
+        root.right = parent
+        return root
+
+    def left_balance(self, parent):
+        root = parent.right
+        parent.right = root.left
+        root.left = parent
+        return root
+    
     def preorder_traversal(self):
         if self.is_empty(self.root):
             raise TypeError("Empty tree")
@@ -332,9 +352,12 @@ class RandomBinarySearchTree:
         if not data.isdigit():
             raise ValueError("Only numbers can be removed from the tree")
         data = int(data)
-        if self.is_empty(self.root):
-            raise TypeError("Empty tree")
-        return self.remove_root(self.root, data)
+        self.root = self.remove_root(self.root, data)
+        if self.depth(self.root.right, 0) - self.depth(self.root.left, 0) > 1:
+            self.root = self.left_balance(self.root)
+        elif self.depth(self.root.right, 0) - self.depth(self.root.left, 0) < -1:
+            self.root = self.right_balance(self.root)
+        return self.root
     
     def remove_root(self, root, data):
         if self.is_empty(root):
@@ -548,10 +571,6 @@ while True:
         case _:
             print("Научись вводить команды правильно :З")
     x = input("Введите еще команду: ")
-
-```
-
-```python
 
 ```
 
